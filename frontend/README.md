@@ -1,104 +1,99 @@
-# 👗 GenFit - Virual Try on AI.
+# 👗 GenFit – Virtual Try-On AI
 
-![Project Banner](./logo.png)
+![Genfit Banner](frontend/public/logo.png)
 
-A cutting-edge, Generative AI-powered virtual try-on web application that enables users to upload a person (model) image and a clothing item image to generate photorealistic try-on previews in seconds. Built using Google Gemini (Generative AI) and FastAPI, this tool delivers high-fidelity outfit visualization with facial identity preservation and seamless garment rendering—perfect for fashion tech, e-commerce, and virtual fitting room experiences.
+A Gen AI-powered virtual try-on web application that allows users to upload a person image and a clothing image to generate photorealistic outfit previews.  
+Built with **Google Gemini**, **FastAPI**, and **React**.
 
-## 🌟 Key Features
+---
 
-- **Photorealistic Virtual Try-On** - Generate AI-based try-on images with high fidelity
-- **Identity Preservation** - Maintains facial features and body proportions
-- **Garment Accuracy** - Preserves texture, patterns, and details of clothing items
-- **Smart Backgrounds** - Automatically removes and replaces backgrounds
-- **Session History** - View and save previous try-on results during your session
-- **Responsive UI** - Works seamlessly across devices with dark/light mode support
-- **Customization Options** - Control style, garment type, and other parameters
+## 🌟 Features
 
-## 🛠️ Technology Stack
+- **Photorealistic AI Try-On**
+- **Facial Identity Preservation**
+- **Detailed Garment Rendering**
+- **Background Removal & Replacement**
+- **Session History Storage**
+- **Responsive Dark/Light UI**
+- **Customizable Prompts & Styles**
 
-### Frontend
-- **React.js** - Core framework
-- **Ant Design** - UI components and layout
-- **Axios** - API communication
-- **React Toastify** - Notifications
-- **CSS Modules** - Styling
+---
 
-### Backend
-- **FastAPI** - REST API framework
-- **Uvicorn** - ASGI server
-- **Pydantic** - Data validation
-- **Python 3.12+** - Backend logic
+## 🛠️ Tech Stack
 
-### AI & Processing
-- **Google Gemini API** - Generative AI core
-- **Multimodal Processing** - Image-to-image generation
-- **Base64 Handling** - Image encoding/decoding
+### 🔹 Frontend
+- React.js
+- Ant Design
+- Axios
+- React Toastify
+- CSS Modules
 
-## 🚀 Getting Started
+### 🔹 Backend
+- FastAPI + Uvicorn
+- Python 3.12+
+- Pydantic
 
-### Prerequisites
-- Node.js (v18+)
-- Python (3.12+)
-- Poetry (for Python dependency management)
-- Google Gemini API key
+### 🔹 AI Integration
+- Google Gemini API
+- Multimodal Image Processing
+- Base64 Image Encoding/Decoding
 
-### Installation
+---
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/abhijeetrogye/genfit.git
-   cd genfit
+## 🚀 Local Development Setup
 
-2. **Backend Setup**
+### 🔧 Backend
 
-    ```bash
-    cd backend
-    poetry install
-    poetry shell
+```bash
+cd backend
+poetry install
+poetry shell
+````
 
-3. **Create .env file:**
+Create `.env` file:
 
-    ```ini
-    GEMINI_API_KEY=your_actual_gemini_api_key
+```ini
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
-4. **Run backend:**
-    ```bash
-    uvicorn main:app --reload
+Run server:
 
-5. **Frontend Setup**
-    ```bash
-    cd ../frontend
-    npm install
-    npm run dev
+```bash
+uvicorn main:app --reload
+```
 
-The application will be available at http://localhost:3000 with the API running on http://localhost:8000.
+### 💻 Frontend
 
-📚 Documentation
-API Endpoints
-POST /api/try-on
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-Accepts multipart form data with:
+* App: [http://localhost:3000](http://localhost:3000)
+* API: [http://localhost:8000](http://localhost:8000)
 
-person_image: Model image (JPEG/PNG)
+---
 
-cloth_image: Clothing item image (JPEG/PNG)
+## 📚 API Documentation
 
-Optional parameters:
+### `POST /api/try-on`
 
-instructions: Custom prompts
+**Form Fields:**
 
-model_type: Body type
+| Field         | Type            | Description                |
+| ------------- | --------------- | -------------------------- |
+| person\_image | Image (jpg/png) | Image of the model/person  |
+| cloth\_image  | Image (jpg/png) | Clothing item image        |
+| instructions  | Text (optional) | Custom prompt instructions |
+| model\_type   | Text (optional) | Body type                  |
+| gender        | Text (optional) | Male / Female / Other      |
+| style         | Text (optional) | Clothing style             |
+| garment\_type | Text (optional) | Top / Bottom / Dress etc.  |
 
-gender: Male/Female/Other
+**Response:**
 
-style: Clothing style
-
-garment_type: Top/Bottom/Dress etc.
-
-Response Format
-
-json
-
+```json
 {
   "status": "success",
   "generated_image": "base64_encoded_image",
@@ -108,50 +103,76 @@ json
     "model_attributes": {...}
   }
 }
+```
 
-📂 Project Structure
-text
+---
+
+## 📁 Project Structure
+
+```
 genfit/
 ├── backend/
-│   ├── main.py            # FastAPI application
-│   ├── utils/             # Helper functions
-│   ├── .env               # Environment variables
-│   └── poetry.lock        # Dependency lock file
+│   ├── main.py
+│   ├── utils/
+│   ├── .env
+│   └── poetry.lock
 │
 ├── frontend/
-│   ├── public/            # Static assets
+│   ├── public/
 │   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── pages/         # Application views
-│   │   ├── services/      # API services
-│   │   └── styles/        # CSS modules
-│   └── package.json       # Frontend dependencies
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── styles/
+│   └── package.json
 │
-├── screenshots/           # Application screenshots
-└── README.md              # This document
+├── screenshots/
+└── README.md
+```
 
-🤝 Contributing
-We welcome contributions! Please follow these steps:
+---
 
-Fork the repository
+## 🤝 Contributing
 
-Create your feature branch (git checkout -b feature/AmazingFeature)
+```bash
+# Fork the repository
+# Create a new feature branch
+git checkout -b feature/YourFeature
 
-Commit your changes (git commit -m 'Add some AmazingFeature')
+# Commit your changes
+git commit -m "Added new feature"
 
-Push to the branch (git push origin feature/AmazingFeature)
+# Push to GitHub
+git push origin feature/YourFeature
 
-Open a Pull Request
+# Open a Pull Request
+```
 
-✨ Contributors
-<table> <tr> <td align="center"> <a href="https://github.com/abhijeetrogye"> <img src="https://avatars.githubusercontent.com/u/your_avatar" width="100px;" alt="Abhijeet Rogye"/> <br /> <sub><b>Abhijeet Rogye</b></sub> </a> <br /> <span>Lead Developer & Gen AI</span> </td> <td align="center"> <a href="https://github.com/AryaKurup16"> <img src="https://avatars.githubusercontent.com/u/your_avatar" width="100px;" alt="Arya Kurup"/> <br /> <sub><b>Arya Kurup</b></sub> </a> <br /> <span>Backend Developer</span> </td> <td align="center"> <a href="https://github.com/virajtamhanekar"> <img src="https://avatars.githubusercontent.com/u/your_avatar" width="100px;" alt="Viraj Tamhanekar"/> <br /> <sub><b>Viraj Tamhanekar</b></sub> </a> <br /> <span>Frontend Developer</span> </td> </tr> </table>
+---
 
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## ✨ Contributors
 
-🙏 Acknowledgments
-Google Gemini team for the powerful generative AI API
+* [GitHub – Abhijeet Rogye](https://github.com/abhijeetrogye)
+  [LinkedIn – Abhijeet Rogye](https://linkedin.com/in/abhijeetrogye)
 
-Ant Design for the beautiful UI components
+* [GitHub – Arya Kurup](https://github.com/AryaKurup16)
+  [LinkedIn – Arya Kurup](https://www.linkedin.com/in/arya-kurup-aa7264244/)
 
-FastAPI community for the excellent web framework
+* [GitHub – Viraj Tamhanekar](https://github.com/virajtamhanekar)
+  [LinkedIn – Viraj Tamhanekar](https://www.linkedin.com/in/viraj-tamhanekar/)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+See the `LICENSE` file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+* Google Gemini – Generative AI API
+* Ant Design – UI Components
+* FastAPI – Web Backend Framework
+
