@@ -126,7 +126,6 @@ genfit/
 │   │   └── styles/
 │   └── package.json
 │
-├── screenshots/
 └── README.md
 ```
 
