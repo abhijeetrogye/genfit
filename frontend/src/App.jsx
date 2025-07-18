@@ -21,6 +21,7 @@ import {
   BulbFilled,
   GithubOutlined,
   LinkedinOutlined,
+  DownloadOutlined,
 } from "@ant-design/icons";
 
 import ImageUpload from "./components/ImageUpload";
@@ -104,6 +105,17 @@ function App() {
     }
   };
 
+  const handleDownload = () => {
+    if (!result) return;
+    
+    const link = document.createElement('a');
+    link.href = result.resultImage;
+    link.download = `try-on-result-${Date.now()}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const bgColor = isDarkMode ? "#0f0f0f" : "#f9fafb";
   const cardColor = isDarkMode ? "#1c1c1c" : "#ffffff";
   const textColor = isDarkMode ? "#e4e4e4" : "#111827";
@@ -134,7 +146,6 @@ function App() {
           alt="GenFit Logo"
           style={{ height: "150px", marginTop: "120px" }}
         />
-
 
           <Switch
             checked={isDarkMode}
@@ -345,6 +356,16 @@ function App() {
                     }}
                   />
                 </div>
+                <div style={{ textAlign: "center", marginTop: 16 }}>
+                  <Button
+                    type="primary"
+                    icon={<DownloadOutlined />}
+                    onClick={handleDownload}
+                    style={{ marginTop: 16 }}
+                  >
+                    Download Image
+                  </Button>
+                </div>
                 <Text
                   style={{
                     display: "block",
@@ -385,6 +406,23 @@ function App() {
                             marginBottom: 12,
                           }}
                         />
+                        <div style={{ textAlign: "center" }}>
+                          <Button
+                            type="primary"
+                            icon={<DownloadOutlined />}
+                            onClick={() => {
+                              const link = document.createElement('a');
+                              link.href = item.resultImage;
+                              link.download = `try-on-result-${item.id}.jpg`;
+                              document.body.appendChild(link);
+                              link.click();
+                              document.body.removeChild(link);
+                            }}
+                            style={{ marginBottom: 12 }}
+                          >
+                            Download
+                          </Button>
+                        </div>
                         <Text
                           style={{
                             display: "block",
