@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.routers import tryon
+from routers import tryon
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
