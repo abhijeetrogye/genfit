@@ -1,10 +1,10 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from fastapi.responses import JSONResponse
-from backend.utils.base64_helpers import array_buffer_to_base64 
+from utils.base64_helpers import array_buffer_to_base64
 from dotenv import load_dotenv
 import os
-import google.generativeai as genai  
-from google.generativeai import types
+from google import genai
+from google.genai import types
 import traceback
 import base64
 
@@ -16,11 +16,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise ValueError("Missing GEMINI_API_KEY in .env")
 
-# Configure the Gemini API
-genai.configure(api_key=GEMINI_API_KEY)
-
-# Create the model instance
-model = genai.GenerativeModel("gemini-pro")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 @router.post("/try-on")
 async def try_on(
@@ -188,12 +184,11 @@ async def try_on(
             ),
         ]        
         
-        model = genai.GenerativeModel("gemini-2.0-flash-exp-image-generation")
-        
-        response = model.generate_content(
+        response = client.models.generate_content(
+            model="gemini-2.0-flash-exp-image-generation",
             contents=contents,
-            generation_config=genai.types.GenerationConfig(
-                response_mime_type=["text/plain", "image/png"]
+            config=types.GenerateContentConfig(
+            response_modalities=['TEXT', 'IMAGE']
             )
         )
 
